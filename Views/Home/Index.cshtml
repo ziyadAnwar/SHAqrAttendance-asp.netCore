@@ -1,0 +1,92 @@
+﻿@model Student
+
+<main id="main">
+
+    <!-- ======= About Section ======= -->
+  <!-- End About Section -->
+    <!-- ======= Services Section ======= -->
+    <section id="contact" class="contact">
+        <div class="container" data-aos="fade-up">
+
+            <div class="section-title">
+                <h2>Auto</h2>
+                <p>Automatic Attendanc</p>
+            </div>
+          <section id="services" class="services">
+             <div style="margin: auto; width: 400px;">
+                <div class="container" data-aos="fade-up">
+                    @using (Html.BeginForm("index", "Home", FormMethod.Post))
+                    {
+                        <input type="text" name="InputText" />
+                        <input type="submit" value="Generate" />
+                    }
+                    <hr />
+                    @if (ViewBag.QRCode != null)
+                    {
+                        <img src="@ViewBag.QRCode" style="width:500px; height:500px " />
+                    }
+                </div>
+             </div>
+          </section>
+
+
+    </div>
+    </section>
+    <section id="contact" class="contact">
+        <div class="container" data-aos="fade-up">
+
+            <div class="section-title">
+                <h2>MANUAL</h2>
+                <p>Manual Attendanc</p>
+            </div>
+
+            <section id="services" class="services">
+
+                <div style="margin: auto; width: 400px;">
+                    <div class="icon-box">
+                        <form asp-action="SaveStudent" role="form">
+                            <div class="form-group mt-3">
+                                <input type="text" asp-for="StuID" class="form-control" placeholder="Student Id" required="">
+                            </div>
+                            <div class="form-group mt-3">
+                                <input type="text" asp-for="Name" class="form-control" placeholder="Student Name" required>
+                            </div>
+
+
+                            <div class="text-center" style="margin-top:25px"><button class="btn btn-success" type="submit">Attenden</button></div>
+                        </form>
+                    </div>
+                </div>
+
+            </section>
+
+
+
+        </div>
+    </section>
+    <section id="about" class="about">
+        <div class="container" data-aos="fade-up">
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Student ID</th>
+                        <th>Student Name</th>
+
+                    </tr>
+                </thead>
+                @foreach (var item in ViewBag.res)
+                {
+                    <tr>
+                        <th> @item.StuID</th>
+                        <th>@item.Name</th>
+                    </tr>
+                }
+
+            </table>
+            <form method="post" asp-controller="Home" asp-action="SaveAttendencSheet">
+                <input type="submit" value="Save the Attendance" />
+            </form>
+        </div>
+    </section>
+</main><!-- End #main -->
